@@ -3,6 +3,10 @@ const { join } = require("path");
 const { splitDirectoryName } = require("./helpers");
 
 async function writeExercise(exercisePath) {
+  // Validate exercisePath to prevent path traversal
+  if (exercisePath.includes("..")) {
+    throw new Error("Invalid path");
+  }
   const { exerciseName } = splitDirectoryName(exercisePath);
   const isSolutionFile = exercisePath.includes("/solution");
   const exerciseContent = `const ${exerciseName} = function() {

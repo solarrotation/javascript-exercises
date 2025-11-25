@@ -27,7 +27,7 @@ describe('${exerciseName}', () => {
 `;
 
   await writeFile(
-    join(exercisePath, `${trueExerciseName}.spec.js`),
+    join(exercisePath.includes("..") ? throw new Error("Invalid path") : exercisePath, `${trueExerciseName}.spec.js`),
     exerciseSpecContent
   );
 }
