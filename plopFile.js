@@ -19,6 +19,9 @@ module.exports = function (plop) {
     const exerciseDirectoryName = await createExerciseDirectoryName(
       camelExerciseName
     );
+    if (exerciseDirectoryName.includes('..')) {
+      throw new Error('Invalid directory name');
+    }
     const basePath = join("./", exerciseDirectoryName);
     const solutionPath = join(basePath, "solution");
 
